@@ -1,8 +1,10 @@
 // The Foo module's short description.
-
+//
 // The Foo module's long description is here.
 // It can span multiple lines and provide
 // more detail about your module's usage.
+//
+// Here's another paragraph.
 
 package main
 
