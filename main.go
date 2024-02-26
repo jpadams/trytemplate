@@ -1,5 +1,5 @@
 // The Foo module's short description.
-//
+
 // The Foo module's long description is here.
 // It can span multiple lines and provide
 // more detail about your module's usage.
@@ -21,7 +21,7 @@ func (m *Foo) Base() *Container {
 		WithExec([]string{"apk", "add", "bash", "figlet"})
 }
 
-// Returns a container that echoes a message and its length using a Bash script.
+// Returns a container that echoes a message and its length using a Bash script
 func (m *Foo) EchoLength(message string) *Container {
 	bashScript := fmt.Sprintf(`
 	declare -A myArray
@@ -33,7 +33,7 @@ func (m *Foo) EchoLength(message string) *Container {
 	return m.Base().WithExec([]string{"bash", "-c", bashScript})
 }
 
-// Returns a message as a large banner and optionally provides metadata.
+// Returns a message as a large banner and optionally provides metadata
 func (m *Foo) Big(
 	ctx context.Context,
 	// +optional
@@ -51,7 +51,7 @@ func (m *Foo) Big(
 	return output
 }
 
-// Runs grep using pattern in a container over provided Directory.
+// Runs grep using pattern in a container over provided Directory
 func (m *Foo) GrepDir(ctx context.Context, directory *Directory, pattern string) (string, error) {
 	return dag.Container().
 		From("alpine:latest").
@@ -61,7 +61,7 @@ func (m *Foo) GrepDir(ctx context.Context, directory *Directory, pattern string)
 		Stdout(ctx)
 }
 
-// Takes a message and creates a Directory with a banner and metadata Files.
+// Takes a message and creates a Directory with a banner and metadata Files
 func (m *Foo) Bundle(ctx context.Context, message string) *Directory {
 	metadata, _ := m.EchoLength(message).Stdout(ctx)
 	return dag.Directory().
@@ -69,7 +69,7 @@ func (m *Foo) Bundle(ctx context.Context, message string) *Directory {
 		WithNewFile("/metadata", metadata)
 }
 
-// Searches over a Directory of files created using message returning result.
+// Searches over a Directory of files created using message returning result
 func (m *Foo) Search(ctx context.Context, message string) string {
 	dir := m.Bundle(ctx, message)
 	result, _ := m.GrepDir(ctx, dir, message)
